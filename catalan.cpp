@@ -1,11 +1,9 @@
-#include<stdio.h>
+#include<iostream>
+using namespace std;
 
 int cat(int n)
 {
-	if(n==0)
-	{
-		return 1;
-	}
+	if(!n) return 1;
 	else
 	{
 	    int res=0;
@@ -16,10 +14,9 @@ int cat(int n)
 	    return res;
 	}
 }
-int main()
-{
-    int n;
-    scanf("%d",&n);
-	printf("%d",cat(n));
-	return 0;
+int main(){
+	int n;
+	cin>>n;
+	cout<<cat(n);
 }
+
