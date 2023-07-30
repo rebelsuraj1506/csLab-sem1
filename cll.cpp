@@ -1,21 +1,21 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include <bits/stdc++.h>
+using namespace std;
 struct Node {
     int value;
     struct Node* next;
 };
-void updateCircularLinkedList(struct Node* head, int k) {
-    int findMaxInNextK(struct Node* current_node, int k) {
-        int max_value = current_node->next->value;
-        struct Node* node = current_node->next;
-        for (int i = 0; i < k; ++i) {
-            if (node->value > max_value) {
-                max_value = node->value;
-            }
-            node = node->next;
+int findMaxInNextK(struct Node* current_node, int k) {
+    int max_value = current_node->next->value;
+    struct Node* node = current_node->next;
+    for (int i = 0; i < k; ++i) {
+        if (node->value > max_value) {
+            max_value = node->value;
         }
-        return max_value;
+        node = node->next;
     }
+    return max_value;
+}
+void updateCircularLinkedList(struct Node* head, int k) {
     int length = 1;
     struct Node* node = head->next;
     while (node != head) {
@@ -47,32 +47,34 @@ void printCircularLinkedList(struct Node* head) {
     }
     struct Node* node = head;
     do {
-        printf("%d ", node->value);
+        cout << node->value << " ";
         node = node->next;
     } while (node != head);
-    printf("\n");
+    cout << endl;
 }
 int main() {
-    struct Node* nodes[12];
+    int m;
+    cin>>m;
+    struct Node* nodes[m];
     int k=3;
     int temp[k];
-    for (int i = 0; i < 12; ++i) {
+    for (int i = 0; i < m; ++i) {
         nodes[i] = (struct Node*)malloc(sizeof(struct Node));
         int n;
-        printf("Enter the nodes");
-        scanf("%d",&n);
+        // cout << "Enter the nodes: ";
+        cin >> n;
         nodes[i]->value=n;
     }
-    for (int i = 0; i < 11; ++i) {
+    for (int i = 0; i < m-1; ++i) {
         nodes[i]->next = nodes[i + 1];
     }
-    nodes[11]->next = nodes[0];
-    printf("Original Circular Linked List:\n");
+    nodes[m-1]->next = nodes[0];
+    cout << "Original Circular Linked List:" << endl;
     printCircularLinkedList(nodes[0]);
     updateCircularLinkedList(nodes[0], k);
-    printf("\nUpdated Circular Linked List:\n");
+    cout << "\nUpdated Circular Linked List:" << endl;
     printCircularLinkedList(nodes[0]);
-    for (int i = 0; i < 12; ++i) {
+    for (int i = 0; i < m; ++i) {
         free(nodes[i]);
     }
     return 0;
